@@ -8,7 +8,7 @@ const { NODE_ENV, PORT } = process.env;
 const app = express();
 
 // Middleware
-// ...
+app.use(express.json());
 
 // Routing
 app.use('/api', apiRouter);

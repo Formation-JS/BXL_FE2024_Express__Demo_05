@@ -1,5 +1,6 @@
 import express from 'express';
 import { apiRouter } from './routers/index.js';
+import { authentificationMiddleware } from './middlewares/auth.middleware.js';
 
 // Variable d'en
 const { NODE_ENV, PORT } = process.env;
@@ -8,6 +9,7 @@ const { NODE_ENV, PORT } = process.env;
 const app = express();
 
 // Middleware
+app.use(authentificationMiddleware());
 app.use(express.json());
 
 // Routing

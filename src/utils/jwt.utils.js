@@ -32,3 +32,28 @@ export function generateToken({ id, username, role }) {
 
     });
 }
+
+export function decodeToken(token) {
+
+    // Ecriture sous forme de promesse 
+    return new Promise((resolve, reject) => {
+
+        //? Clef secret pour la signature du token
+        const secretKey = process.env.JWT_SECRET 
+
+        //? Option de validation
+        const options = {
+            issuer: process.env.JWT_ISSUER,
+            audience: process.env.JWT_AUDIENCE
+        }
+
+        jwt.verify(token, secretKey, options, (error, data) => {
+            if(error) {
+                reject(error);
+                return;
+            }
+
+            resolve(data);
+        });
+    });
+}
